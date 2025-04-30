@@ -1,0 +1,22 @@
+%% Assumptions 
+
+%Earth radius and gravitational parameter
+R_Earth = 6378.1370; %[km]
+mu_Earth = 3.98600418*e14; %[km^3/s^2]
+
+% Altitude and radius vector of the spacecraft S/C
+h1 = 600; %[km]
+R1 = R_Earth + h1; %[km]
+
+% Altitude and radius vector of the Debris 
+h2 = 350; %[km]
+R2 = R_Earth + h2; %[km]
+
+%Phasing angle 
+phi0_deg = 10; %[°]
+phi0_rad = deg2rad(phi0_deg); %[rad]
+
+%% Hohmann Transfert 
+
+
+
