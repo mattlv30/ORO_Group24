@@ -16,9 +16,10 @@ R2 = R_Earth + h2; %[km]
 phi0_deg = 10; %[°]
 phi0_rad = deg2rad(phi0_deg); %[rad]
 
-%% Orbital Velocity 
+% Orbital Velocity 
 
-
+V1 = sqrt(mu_Earth/R1); %[km/s]
+V2 = sqrt(mu_Earth/R2); %[km/s]
 
 %% Hohmann Transfert 
 
