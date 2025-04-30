@@ -1,0 +1,65 @@
+clear all; clc; close all; 
+
+%% Assumptions 
+
+%Earth radius and gravitational parameter
+R_Earth = 6378.1370; %[km]
+mu_Earth = 3.98600418e5; %[km^3/s^2]
+
+% Altitude and radius vector of the spacecraft S/C
+h1 = 600; %[km]
+r1 = R_Earth + h1; %[km]
+
+% Altitude and radius vector of the Debris 
+h2 = 350; %[km]
+r2 = R_Earth + h2; %[km]
+
+%Phasing angle 
+phi0_deg = 10; %[°]
+phi0_rad = deg2rad(phi0_deg); %[rad]
+
+% Orbital Velocity 
+
+V1 = sqrt(mu_Earth/r1); %[km/s]
+V2 = sqrt(mu_Earth/r2); %[km/s]
+
+%% Hohmann Transfert - Analitical 
+
+[DeltaV1,DeltaV2, DeltaVtot, TOF] = HohmannTransfer(r1,r2, mu_Earth);
+
+%% Plot of the orbits
+
+a_transfer = (r1 + r2)/2;  % Semi-major axis of elliptical transfer orbit
+
+theta = linspace(0, 2*pi, 500);  % Angle for full orbit (rad)
+
+%% Circular orbit (initial)
+x_circ = r1 * cos(theta);
+y_circ = r1 * sin(theta);
+
+%% Elliptical transfer orbit (Hohmann)
+r_ellipse = (a_transfer * (1 - (r1/a_transfer)^2)) ./ ...
+            (1 + ((r2 - r1)/(r2 + r1)) * cos(theta));  % polar form
+
+x_ellipse = r_ellipse .* cos(theta);
+y_ellipse = r_ellipse .* sin(theta);
+
+% Shift the elliptical orbit so that the periapsis is at r1 (central body at focus)
+focus_shift = a_transfer - r1;
+x_ellipse = x_ellipse - focus_shift;
+
+%% Plotting
+
+figure;
+hold on;
+axis equal;
+grid on;
+plot(0, 0, 'yo', 'MarkerSize', 10, 'MarkerFaceColor', 'y');  % Central body (e.g. Earth)
+plot(x_circ, y_circ, 'b', 'LineWidth', 1.5);                 % Circular orbit
+plot(x_ellipse, y_ellipse, 'r--', 'LineWidth', 1.5);         % Elliptical transfer
+
+legend('Central body', 'Circular Orbit', 'Hohmann Transfer');
+xlabel('x (km)');
+ylabel('y (km)');
+title('Circular and Hohmann Transfer Orbits');
+
