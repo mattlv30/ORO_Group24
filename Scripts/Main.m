@@ -33,11 +33,17 @@ fprintf('DeltaV2: %.4f km/s\n', DeltaV2);
 fprintf('Total DeltaV: %.4f km/s\n', DeltaVtot);
 fprintf('Time of Flight: %.1f s (%.2f minutes)\n', ToF, ToF/60);
 
+%% fasatura
+n2=sqrt(mu_Earth/r2^3);
+n1=sqrt(mu_Earth/r1^3);
+t_phasing=(n2*ToF-pi-phi0_rad)/(n1-n2);
+phi=phi0_rad-(n2-n1)*t_phasing;
+
 %% Plotting the Orbits
 
 span = 500;
 
-% Circular orbits 
+% Circular orbits
 f = linspace(0, 2*pi, span); 
 orbit1 = r1 * [cos(f); sin(f)];
 orbit2 = r2 * [cos(f); sin(f)];
@@ -47,21 +53,29 @@ f_h = linspace(pi, 2*pi, span/2);
 r_trans = a_h*(1-e_h^2) ./ (1+e_h*cos(f_h));
 Htransfert = r_trans .* [cos(f_h) ; sin(f_h)];
 
+f_phasing1=linspace(pi-n1*t_phasing,pi,span); %
+f_phasing2=linspace(pi-n2*t_phasing,pi-phi,span); %
+
 figure;
 hold on; grid on; axis equal;
-plot(orbit1(1,:), orbit1(2,:), 'b--', 'LineWidth', 1.5);
-plot(orbit2(1,:), orbit2(2,:), 'r--', 'LineWidth', 1.5);
-plot(Htransfert(1,:), Htransfert(2,:), 'k-', 'LineWidth', 2);
-plot(-r1, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b');
-plot(r2*cos(2*pi), r2*sin(2*pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r');
-legend('Initial Orbit', 'Target Orbit', 'Hohmann Transfer', 'Start Point', 'End Point');
+
+% plot complete circular orbits
+plot(orbit1(1,:), orbit1(2,:), 'b', 'LineWidth', 0.5);
+plot(orbit2(1,:), orbit2(2,:), 'r', 'LineWidth', 0.5);
+
+% plot phasing orbit assuming Hohmann transfer starts at pi cartesian
+plot(r1*cos(f_phasing1),r1*sin(f_phasing1),"b", 'LineWidth', 1.5)
+plot(r2*cos(f_phasing2),r2*sin(f_phasing2),"r", 'LineWidth', 1.5)
+plot(r1*cos(f_phasing1(1)),r1*sin(f_phasing1(1)),"b*", 'LineWidth', 1.5,'HandleVisibility','off')
+plot([r2*cos(f_phasing2(1)),r2*cos(f_phasing2(end))],[r2*sin(f_phasing2(1)),r2*sin(f_phasing2(end))],"r*", 'LineWidth', 1.5,'HandleVisibility','off')
+
+% plot H transfer
+plot(Htransfert(1,:), Htransfert(2,:), 'k', 'LineWidth', 2);
+plot(-r1, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b','HandleVisibility','off');
+plot(r2*cos(2*pi), r2*sin(2*pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r','HandleVisibility','off');
+legend('Initial Orbit', 'Target Orbit',"phasing target","phasing chaser", 'Hohmann Transfer');
 title('Hohmann Transfer Maneuver');
 xlabel('X [km]'); ylabel('Y [km]');
 
 
-%% fasatura
-n2=sqrt(mu_Earth/r2^3);
-n1=sqrt(mu_Earth/r1^3);
-t_phasing=(n2*ToF-pi-phi0_rad)/(n1-n2)
-phi=phi0_rad-(n2-n1)*t_phasing;
-ToF*n2-phi
+%e=1-(V2-DeltaV2)^2*r2/mu_Earth
