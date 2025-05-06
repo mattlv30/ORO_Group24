@@ -43,7 +43,7 @@ orbit1 = r1 * [cos(f); sin(f)];
 orbit2 = r2 * [cos(f); sin(f)];
 
 % Transfer ellipse
-f_h = linspace(0, pi, span/2);
+f_h = linspace(pi, 2*pi, span/2);
 r_trans = a_h*(1-e_h^2) ./ (1+e_h*cos(f_h));
 Htransfert = r_trans .* [cos(f_h) ; sin(f_h)];
 
@@ -52,8 +52,8 @@ hold on; grid on; axis equal;
 plot(orbit1(1,:), orbit1(2,:), 'b--', 'LineWidth', 1.5);
 plot(orbit2(1,:), orbit2(2,:), 'r--', 'LineWidth', 1.5);
 plot(Htransfert(1,:), Htransfert(2,:), 'k-', 'LineWidth', 2);
-plot(r1, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b');
-plot(r2*cos(pi), r2*sin(pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r');
+plot(-r1, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b');
+plot(r2*cos(2*pi), r2*sin(2*pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r');
 legend('Initial Orbit', 'Target Orbit', 'Hohmann Transfer', 'Start Point', 'End Point');
 title('Hohmann Transfer Maneuver');
 xlabel('X [km]'); ylabel('Y [km]');
