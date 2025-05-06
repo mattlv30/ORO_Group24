@@ -59,7 +59,7 @@ title('Hohmann Transfer Maneuver');
 xlabel('X [km]'); ylabel('Y [km]');
 
 
-%% fasatura
+%% Phasing
 n2=sqrt(mu_Earth/r2^3);
 n1=sqrt(mu_Earth/r1^3);
 t_phasing=(n2*ToF-pi-phi0_rad)/(n1-n2)
