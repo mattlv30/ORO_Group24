@@ -33,6 +33,18 @@ fprintf('DeltaV2: %.4f km/s\n', DeltaV2);
 fprintf('Total DeltaV: %.4f km/s\n', DeltaVtot);
 fprintf('Time of Flight: %.1f s (%.2f minutes)\n', ToF, ToF/60);
 
+%% Phasing
+% Debris angluar velocity 
+n2=sqrt(mu_Earth/r2^3); %[rad/s]
+% Spacecraft angluar velocity 
+n1=sqrt(mu_Earth/r1^3); %[rad/s]
+
+% Time to wait before starting the transfer
+t_phasing=(n2*ToF-pi-phi0_rad)/(n1-n2);
+fprintf('Phasing time: %.1f s (%.2f minutes)\n', t_phasing, t_phasing/60);
+
+% Phase angle between S/C and Debris before starting the transfert
+phi=phi0_rad-(n2-n1)*t_phasing;
 %% Plotting the Orbits
 
 span = 500;
@@ -52,16 +64,10 @@ hold on; grid on; axis equal;
 plot(orbit1(1,:), orbit1(2,:), 'b--', 'LineWidth', 1.5);
 plot(orbit2(1,:), orbit2(2,:), 'r--', 'LineWidth', 1.5);
 plot(Htransfert(1,:), Htransfert(2,:), 'k-', 'LineWidth', 2);
-plot(-r1, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b');
-plot(r2*cos(2*pi), r2*sin(2*pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r');
+plot(r1*cos(pi), r1*sin(pi), 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b');
+plot(r2*cos(pi+pi), r2*sin(pi+pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r');
 legend('Initial Orbit', 'Target Orbit', 'Hohmann Transfer', 'Start Point', 'End Point');
 title('Hohmann Transfer Maneuver');
 xlabel('X [km]'); ylabel('Y [km]');
 
 
-%% Phasing
-n2=sqrt(mu_Earth/r2^3);
-n1=sqrt(mu_Earth/r1^3);
-t_phasing=(n2*ToF-pi-phi0_rad)/(n1-n2)
-phi=phi0_rad-(n2-n1)*t_phasing;
-ToF*n2-phi
