@@ -45,7 +45,6 @@ orbit2 = r2 * [cos(f); sin(f)];
 % Transfer ellipse
 f_h = linspace(0, pi, span/2);
 r_trans = a_h*(1-e_h^2) ./ (1+e_h*cos(f_h));
-  
 Htransfert = r_trans .* [cos(f_h) ; sin(f_h)];
 
 figure;
