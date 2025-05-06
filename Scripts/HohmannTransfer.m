@@ -18,7 +18,6 @@ a_h = (r1 + r2)/2; %[km]
 
 %Eccentricity of the transfer ellipse
 e_h = (r2-r1)/(r2+r1);
-
 % Time Of Flight
 ToF = pi*sqrt((r1+r2)^3/8/mu); %[s]
 end
