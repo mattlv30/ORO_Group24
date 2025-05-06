@@ -35,7 +35,7 @@ fprintf('Time of Flight: %.1f s (%.2f minutes)\n', ToF, ToF/60);
 
 %% Plotting the Orbits
 
-span = 500;
+span = 1000;
 
 % Circular orbits 
 f = linspace(0, 2*pi, span); 
