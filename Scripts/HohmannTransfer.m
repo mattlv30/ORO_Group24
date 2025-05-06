@@ -4,8 +4,9 @@ function [DeltaV1,DeltaV2, DeltaVtot, a_h, e_h, ToF] = HohmannTransfer(r1, r2, m
 %Homann trasnfert between two circular orbis of radii r1 and r2, around a
 %primary with planetary gravitational constant mu
 
-%The output of the funtion are the two Delta V computed at the perigee and
-%apogee of the ellpitical orbit and the time of flight
+%The outputs of the function are the two Delta V computed at the perigee and
+%apogee of the ellpitical orbit, their sum, the semi-major axis, eccentricity
+% and the time of flight
 
 
 % Delta V [km/s]
