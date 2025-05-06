@@ -1,3 +1,5 @@
+%% ORO Project Group 24
+
 clear all; clc; close all; 
 
 %% Assumptions 
@@ -19,11 +21,12 @@ phi0_deg = 10; %[°]
 phi0_rad = deg2rad(phi0_deg); %[rad]
 
 % Orbital Velocity 
-
 V1 = sqrt(mu_Earth/r1); %[km/s]
 V2 = sqrt(mu_Earth/r2); %[km/s]
 
 %% Hohmann Transfert - Analitical 
 
 [DeltaV1,DeltaV2, TOF] = HohmannTransfer(r1,r2, mu_Earth);
+
+
 
