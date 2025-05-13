@@ -39,3 +39,5 @@ om =0;
 
 %% part 2
 [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2);
+
+aaa
