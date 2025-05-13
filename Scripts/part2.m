@@ -117,25 +117,25 @@ end
 % plot dimensional errors
 figure;
 plot(t*n2,err_csi*r2)
-title("Difference between analytical and numerical solution postion h_1")
+title("Error postion h_1")
 xlabel("t [s]")
 ylabel("[km]")
 
 figure;
 plot(t*n2,err_v_csi*r2*n2)
-title("Difference between analytical and numerical solution position h_2")
+title("Error position h_2")
 xlabel("t [s]")
 ylabel("[km]")
 
 figure;
 plot(t*n2,err_eta*r2)
-title("Difference between analytical and numerical solution velocity h_1")
+title("Error velocity h_1")
 xlabel("t [s]")
 ylabel("[km/s]")
 
 figure;
 plot(t*n2,err_v_eta*r2*n2)
-title("Difference between analytical and numerical solution velocity h_2")
+title("Error velocity h_2")
 xlabel("t [s]")
 ylabel("[km/s]")
 
