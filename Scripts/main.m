@@ -37,7 +37,7 @@ om =0;
 
 [DeltaV1,DeltaV2, ToF, phi, t_phasing] = part1(r1,r2, mu_Earth, phi0_rad, V1, e , i, w, om);
 
-%% part 2
+%% part 2 - Relative dynamics final approach
+
 [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2);
 
-%mmmmmmmmmmmmmmmmmm
