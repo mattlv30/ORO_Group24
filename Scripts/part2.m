@@ -1,12 +1,33 @@
 %% Part 2
-% decidere se tenere variabili non usate
-% migliorare i plot
+% This function solves all the request of the second part of the project
+
+%% Inputs
+% r2 - radius of the target orbit
+% n2 - mean motion of the target object
+
+%% Outputs
+
+% rH_err - random error in position
+% rH_dot_err - random error in velocity
+% Delta_T - Delta T (ToF) for min deltaV
+% deltaV1 - first DeltaV
+% deltaV2 - second DeltaV
+
+%% Info 
+
+% Authors: Cristian Iacovella, Mattia Li Vigni, Sara Moreira 
+% Creation date: 13/05/2025
+% Update date:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 
 % r = a + (b-a).*rand(n,1)
 rH_err = [500 + (1000-500).*rand(2,1);0]./1000; % errors between 500 and 1000 in the plane [m]-->[km]
 rH_dot_err = [0.1 + (1-0.1).*rand(2,1);0]./1000; % errors between 0.1 and 1in the plane [m/s]-->[km/s]
+
 % compute for different Delta T time of flight (f_)
 % to adimentionalize it is used L=r2 n=n2 of the target
 % using L=R for normalization distance
