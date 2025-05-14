@@ -3,6 +3,8 @@
 
 clear; clc; close all; 
 
+addpath("Parts\")
+
 %% Initial data 
 
 %Earth radius and gravitational parameter
