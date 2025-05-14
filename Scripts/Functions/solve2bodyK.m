@@ -42,7 +42,7 @@ ff=@(t,z) [
     ]; 
 
 % Change in the tolerance to improve numerical integration
-opts = odeset('Reltol',1e-8,'AbsTol',1e-9,'Stats','on'); 
+opts = odeset('Reltol',1e-8,'AbsTol',1e-9,'Stats','off'); 
 
 % Numerical solution using ode113
 [t, z] = ode113(ff,tspan,cond_i, opts);

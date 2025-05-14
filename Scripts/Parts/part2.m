@@ -95,8 +95,8 @@ end
 Delta_T=ff(idx); % select Delta T (ToF) for min deltaV
 deltaV1=deltaV1(idx,:)';
 deltaV2=deltaV2(idx,:)';
-fprintf('minimum total impulse: %.4f [km/s]\n', min_dV*r2);
-fprintf('ToF for min_dV: %.4f [s]\n', Delta_T*n2);
+fprintf('Minimum total impulse: %.4f [km/s]\n', min_dV*r2);
+fprintf('ToF for minimum DeltaV: %.4f [s] (%.2f minutes)\n', Delta_T/n2, Delta_T/n2/60);
 
 figure;
 plot(ff,deltaVtot,Color="b")
@@ -139,32 +139,44 @@ end
 % plot dimensional errors
 figure;
 plot(t*n2,err_csi*r2)
-title("Difference between analytical and numerical solution postion h_1")
+title("Error postion h_1")
 xlabel("t [s]")
 ylabel("[km]")
 
 figure;
 plot(t*n2,err_v_csi*r2*n2)
-title("Difference between analytical and numerical solution position h_2")
+title("Error position h_2")
 xlabel("t [s]")
 ylabel("[km]")
 
 figure;
 plot(t*n2,err_eta*r2)
-title("Difference between analytical and numerical solution velocity h_1")
+title("Error velocity h_1")
 xlabel("t [s]")
 ylabel("[km/s]")
 
 figure;
 plot(t*n2,err_v_eta*r2*n2)
-title("Difference between analytical and numerical solution velocity h_2")
+title("Error velocity h_2")
 xlabel("t [s]")
 ylabel("[km/s]")
 
 % rendezvous trajectory in Hill CCS
 figure;
-plot(csi,eta)
-title("HWC solution")
-xlabel("csi [-]")
-ylabel("eta [-]")
+plot(csi,eta,"b")
+title("HWC solution position")
+xlabel("\xi [-]")
+ylabel("\eta [-]")
+
+% velocity evolution in Hill CCS
+figure;
+hold on
+plot(v_csi,v_eta,'HandleVisibility','off')
+plot(v_csi(end)+deltaV2(1),v_eta(end)+deltaV2(2),"r*")
+hold off
+title("HWC solution velocity")
+xlabel("v_{\xi} [-]")
+ylabel("v_{\eta} [-]")
+legend("V after 2° impulse")
+
 end

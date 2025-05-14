@@ -15,7 +15,7 @@ f = @(t,z) [z(2);
     -2*z(2);
     z(6);
     -z(5)];
-opts = odeset('Reltol',1e-13,'AbsTol',1e-14,'Stats','on');
+opts = odeset('Reltol',1e-13,'AbsTol',1e-14,'Stats','off');
 [t,z]=ode113(f,tspan,cond_i,opts); % check options
 csi=z(:,1);
 v_csi=z(:,2);
