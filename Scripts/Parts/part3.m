@@ -93,7 +93,7 @@ fprintf('Final velocity offset target - chaser with drag: %.4f [m]\n', norm(r_t(
 
 
 %% implementare hill con chaser v fissa
-[t,csi,eta,,v_csi,v_eta,] = solveHCW_drag(coeff_ad,[rH_err/r2;rH_dot_err/r2/n2+deltaV1],tspan);
+[t,csi,eta,~,v_csi,v_eta,] = solveHCW_drag(coeff_ad,[rH_err/r2;rH_dot_err/r2/n2+deltaV1],tspan);
 
 figure;
 hold on

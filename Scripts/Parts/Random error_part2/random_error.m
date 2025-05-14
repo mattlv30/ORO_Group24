@@ -1,4 +1,6 @@
-clear all; clc; 
+%% Random error
+
+% Generate a random error in position and velocity as an input for part 2
 
 % r = a + (b-a).*rand(n,1)
 rH_err = [500 + (1000-500).*rand(2,1);0]./1000; % errors between 500 and 1000 in the plane [m]-->[km]
