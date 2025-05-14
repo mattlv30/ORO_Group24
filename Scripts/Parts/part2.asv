@@ -55,8 +55,7 @@ deltaV1=zeros(N-1,3);
 deltaV2=zeros(N-1,3);
 deltaVtot=zeros(N-1,1);
 
-%% Analytical solution
-
+%
 [phi_p, phi_c] = analytical_solHCW(f0); % matrix
 
 for ii=1:length(ff)
@@ -67,7 +66,7 @@ for ii=1:length(ff)
     vplus_csi0=(-2*eta0+(2*eta0-3*f_*csi0)*cos(f_)+4*csi0*sin(f_))/(3*f_*sin(f_)+8*cos(f_)-8);
     vplus_eta0=(14*csi0-14*csi0*cos(f_)+(eta0-6*f_*csi0)*sin(f_))/(3*f_*sin(f_)+8*cos(f_)-8);
     vplus_zeta0=-cos(f_)*zeta0/sin(f_);
-
+    
     delta1=[vplus_csi0-v_csi0; vplus_eta0 - v_eta0; vplus_zeta0-v_zeta0];
     
     Ap=phi_p(f_);
@@ -95,8 +94,6 @@ for ii=1:length(ff)
 
 end
 
-%% Minimum impulse
-
 [min_dV, idx]=min(deltaVtot); % find minimum total impulse needed
 Delta_T=ff(idx); % select Delta T (ToF) for min deltaV
 deltaV1=deltaV1(idx,:)';
@@ -104,8 +101,6 @@ deltaV2=deltaV2(idx,:)';
 fprintf('Minimum total impulse: %.4f [km/s]\n', min_dV*r2);
 fprintf('ToF for minimum DeltaV: %.4f [s] (%.2f minutes)\n', Delta_T/n2, Delta_T/n2/60);
 
-
-% Plot impulse for different time of flight
 figure;
 plot(ff,deltaVtot,Color="b")
 title("Values of total impulse for different ToF")
@@ -113,17 +108,13 @@ ylim([0 0.2])
 xlabel("ToF [-]")
 ylabel("\Delta V [-]")
 
-%% Numerical solution for chosen impulse and ToF
-
-% Initial condition
+% numerical solution for chosen impulse and ToF
 vplus_csi0=v_csi0+deltaV1(1);
 vplus_eta0=v_eta0+deltaV1(2);
 vplus_zeta0=v_zeta0+deltaV1(3);
-
-% Numerical solution of the HCW equations
 [t,csi,v_csi,eta,v_eta,~,~]=solveHCW([csi0;vplus_csi0;eta0;vplus_eta0;zeta0;vplus_zeta0],[0 Delta_T]);
 
-%% Difference between analytical and numerical solutions
+% difference between analytical and numerical solutions
 err_csi=zeros(length(t),1);
 err_v_csi=zeros(length(t),1);
 err_eta=zeros(length(t),1);
@@ -148,9 +139,7 @@ for kk=1:length(t)
     err_v_eta(kk)=abs(v_eta(kk)-v_eta_an);
 end
 
-%% Plots 
-
-% Dimensional errors
+% plot dimensional errors
 figure;
 plot(t*n2,err_csi*r2)
 title("Error postion h_1")
@@ -175,14 +164,14 @@ title("Error velocity h_2")
 xlabel("t [s]")
 ylabel("[km/s]")
 
-% Rendezvous trajectory in Hill CCS
+% rendezvous trajectory in Hill CCS
 figure;
 plot(csi,eta,"b")
 title("HWC solution position")
 xlabel("\xi [-]")
 ylabel("\eta [-]")
 
-% Velocity evolution in Hill CCS
+% velocity evolution in Hill CCS
 figure;
 hold on
 plot(v_csi,v_eta,'HandleVisibility','off')
