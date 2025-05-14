@@ -25,6 +25,8 @@ function [DeltaV1,DeltaV2, ToF, phi, t_phasing] = part1(r1,r2, mu_Earth, phi0_ra
 % Creation date: 13/05/2025
 % Update date:
 
+addpath("Functions\")
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Hohmann Transfert - Analitical 

@@ -1,6 +1,8 @@
 %% Part 2
 % This function solves all the request of the second part of the project
 
+function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
+
 %% Inputs
 % r2 - radius of the target orbit
 % n2 - mean motion of the target object
@@ -19,10 +21,11 @@
 % Creation date: 13/05/2025
 % Update date:
 
+addpath("Functions\")
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 
 % r = a + (b-a).*rand(n,1)
 rH_err = [500 + (1000-500).*rand(2,1);0]./1000; % errors between 500 and 1000 in the plane [m]-->[km]
