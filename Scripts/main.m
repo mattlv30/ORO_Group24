@@ -41,7 +41,7 @@ om =0;
 
 %% Part 2 - Relative dynamics final approach
 
-[rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2);
+%[rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2);
 
 %% Part 3 - Perturbations 
 
@@ -50,4 +50,4 @@ CD=2.2; % drag coefficient
 A=2/10^6; % cross-sectional area sat [m^2] ---> [km^2]
 m=325; % sat mass [kg]
 
-part3(rho,CD,A,m,Delta_T,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,deltaV2)
+%part3(rho,CD,A,m,Delta_T,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,deltaV2)

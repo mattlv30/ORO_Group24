@@ -185,4 +185,60 @@ lgd_E =legend('Numerical orbital energy','Analitical orbital energy');
 lgd_E.Position = [0.725 0.18 0.05 0.05]; 
 xlabel('Time [s]');
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Hohmann transfer - Numerical v2
+f_start = 0;
+[t,r,r_dot,f_num_sol] = HohmannTransferNumerical_v2(r1,e,i, om, w, f_start, mu_Earth, ToF,h_start_H, DeltaV1,DeltaV2, t_phasing);
+
+figure
+axis equal; hold on; grid on;
+
+% Plot complete circular orbits
+plot(orbit1(1,:), orbit1(2,:), 'b', 'LineWidth', 0.5);
+plot(orbit2(1,:), orbit2(2,:), 'r', 'LineWidth', 0.5);
+plot(0, 0, 'bo', 'MarkerSize', 20, 'MarkerFaceColor','k','HandleVisibility','off');
+
+% Plot the numerical Hohman transfer
+plot(r(1,:),r(2,:), 'k-', 'LineWidth', 2);
+plot(r(1,1),r(2,1), 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b','HandleVisibility','off');
+plot(r(1,end),r(2,end), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r','HandleVisibility','off');
+title('Numerical and analitical Hohmann transfer')
+legend("Starting orbit","Final Orbit", "Numerical tranfer");
+xlabel('X [km]'); ylabel('Y [km]');
+
+%% Constant of motion :
+
+% 1. Angular momentum h %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+h_vec = cross(r, r_dot);
+h_value = vecnorm(h_vec);
+
+% 2. Eccentricity vector %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+e_vec = cross(r_dot, h_vec)/mu_Earth - r./vecnorm(r);
+e_value = vecnorm(e_vec);
+
+% 3. Total energy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Total orbital energy of the Hohmann transfer (numerical)
+E = 0.5 * vecnorm(r_dot).^2 - mu_Earth ./ vecnorm(r);
+
+%% Plot of the results 
+
+figure;
+subplot(3,1,1);
+plot(t, h_value, 'r', 'LineWidth', 0.5); hold on; grid on;
+title('Angular momentum'); ylabel('h $ [\mathrm{km^2}/\mathrm{s}]$', 'Interpreter', 'latex');
+xlabel('Time [s]');
+
+subplot(3,1,2);
+plot(t, e_value, 'g', 'LineWidth', 0.5); hold on; grid on;
+title('Eccentricity vector'); ylabel('$e [-]$', 'Interpreter', 'latex');
+xlabel('Time [s]');
+
+subplot(3,1,3);
+plot(t, E, 'b', 'LineWidth', 0.5); hold on; grid on;
+title('Total orbital energy'); ylabel('$\epsilon$', 'Interpreter', 'latex');
+xlabel('Time [s]');
+
+
 end

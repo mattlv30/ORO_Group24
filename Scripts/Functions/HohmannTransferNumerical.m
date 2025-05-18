@@ -2,7 +2,7 @@
 % This function numerically computes the Hohmann transfer.
 
 % It perform 3 changes of coordinates going from the orbital elements to
-% the Earth Centered Inertia (ECI) reference frame. Then the impulsive
+% the perifocal reference frame. Then the impulsive
 % velocity needed for the Hohmann transfer is added to the orbital
 % velocity. Finally, the numerical solution of the problem is computed
 % using a numerical solver
