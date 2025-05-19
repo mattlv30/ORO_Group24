@@ -1,14 +1,14 @@
 %% Part 3
 % This function solves all the request of the third part of the project
 
-function [] = part3(rho,CD,A,m,Delta_T,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,deltaV2)
+function [] = part3(rho,CD,A,m,ToF_min,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,deltaV2)
 
 %% Inputs
 % rho - desnity
 % CD - drag coefficient
 % A- cross sectional area
 % m - satellite mass
-% Delta_T - ToF of the minimum Delta V trajcetory
+% ToF_min - ToF of the minimum Delta V trajcetory
 % r2 - radius of the target orbit
 % mu_Earth - gravitational pararmeter of the primary (Earth)
 % rH_err - random error in position
@@ -30,8 +30,8 @@ addpath("Functions\")
 
 
 n2=sqrt(mu_Earth/r2^3);
-% fixed tspan to confront different propagations
-tspan=linspace(0, Delta_T,500); % adimensional time
+% fixed tspan to compare different propagations
+tspan=linspace(0, ToF_min,500); % adimensional time
 
 % get initial condition target in Equatorial
 [rH_target,rH_dot_target] = get_kepel2hill(r2,0,0,mu_Earth);
@@ -123,7 +123,7 @@ fprintf('Final velocity offset target - chaser with drag: %.4f [m]\n', norm(r_t(
 
 
 %% implementare hill con chaser v fissa
-[t,csi,eta,~,v_csi,v_eta,] = solveHCW_drag(coeff_ad,[rH_err/r2;rH_dot_err/r2/n2+deltaV1],tspan);
+[t,csi,eta,~,v_csi,v_eta,~] = solveHCW_drag(coeff_ad,[rH_err/r2;rH_dot_err/r2/n2+deltaV1],tspan);
 
 figure;
 hold on
