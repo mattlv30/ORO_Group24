@@ -53,7 +53,7 @@ phi = sqrt(mu_Earth/r2^3)*pi*sqrt((r1+r2)^3/8/mu_Earth) - pi;
 t_phasing = (phi0_rad-phi)/(n2-n1);
 
 fprintf('Phasing angle: %.4f rad\n', phi);
-fprintf('Waiting time: %.1f s (%.2f minutes)\n', t_phasing, t_phasing/60);
+fprintf('Waiting time: %.1f s (%.2f minutes)\n \n', t_phasing, t_phasing/60);
 
 %% Plot of the analyitc orbits
 
