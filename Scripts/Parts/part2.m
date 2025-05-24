@@ -21,7 +21,8 @@ function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 % Creation date: 13/05/2025
 % Update date:
 
-addpath("Functions\")
+addpath("Functions\General_Functions")
+addpath("Functions\Function_Part2")
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

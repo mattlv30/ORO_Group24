@@ -25,7 +25,8 @@ function [DeltaV1,DeltaV2, ToF, phi, t_phasing] = part1(r1,r2, mu_Earth, phi0_ra
 % Creation date: 13/05/2025
 % Update date:
 
-addpath("Functions\")
+addpath("Functions\General_Functions")
+addpath("Functions\Function_Part1")
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -33,6 +34,7 @@ addpath("Functions\")
 
 % Computing the Hohmann transfer deltaV using the analitical formulation
 [DeltaV1,DeltaV2, DeltaVtot, a_h, e_h, ToF] = HohmannTransferAnalitical(r1,r2, mu_Earth);
+
 
 fprintf('DeltaV1: %.4f km/s\n', DeltaV1);
 fprintf('DeltaV2: %.4f km/s\n', DeltaV2);
@@ -53,45 +55,10 @@ t_phasing = (phi0_rad-phi)/(n2-n1);
 fprintf('Phasing angle: %.4f rad\n', phi);
 fprintf('Waiting time: %.1f s (%.2f minutes)\n', t_phasing, t_phasing/60);
 
-%% Plot of the orbits
+%% Plot of the analyitc orbits
 
-span = 500;
+[Htransfer, orbit1, orbit2] = plot_Analytical_orbit(a_h,e_h, r1, r2, n1, n2,t_phasing,phi);
 
-% Circular orbits
-f = linspace(0, 2*pi, span); 
-orbit1 = r1 * [cos(f); sin(f)];
-orbit2 = r2 * [cos(f); sin(f)];
-
-% Transfer ellipse
-f_h = linspace(pi, 2*pi, span/2);
-r_trans = a_h*(1-e_h^2) ./ (1+e_h*cos(f_h));
-Htransfert = r_trans .* [cos(f_h) ; sin(f_h)];
-
-% Assumption: Hohmann transfer starts at pi cartesian
-f_phasing1=linspace(pi-n1*t_phasing,pi,span); %
-f_phasing2=linspace(pi-n2*t_phasing,pi-phi,span); %
-
-figure;
-hold on; grid on; axis equal;
-
-% Plot complete circular orbits
-plot(orbit1(1,:), orbit1(2,:), 'b', 'LineWidth', 0.5);
-plot(orbit2(1,:), orbit2(2,:), 'r', 'LineWidth', 0.5);
-plot(0, 0, 'bo', 'MarkerSize', 20, 'MarkerFaceColor','k','HandleVisibility','off');
-
-% Plot phasing orbit 
-plot(r1*cos(f_phasing1),r1*sin(f_phasing1),"b", 'LineWidth', 1.5)
-plot(r2*cos(f_phasing2),r2*sin(f_phasing2),"r", 'LineWidth', 1.5)
-plot(r1*cos(f_phasing1(1)),r1*sin(f_phasing1(1)),"b*", 'LineWidth', 1.5,'HandleVisibility','off')
-plot([r2*cos(f_phasing2(1)),r2*cos(f_phasing2(end))],[r2*sin(f_phasing2(1)),r2*sin(f_phasing2(end))],"r*", 'LineWidth', 1.5,'HandleVisibility','off')
-
-% Plot Hohmann transfer
-plot(Htransfert(1,:), Htransfert(2,:), 'k', 'LineWidth', 2);
-plot(-r1, 0, 'bo', 'MarkerSize', 8, 'MarkerFaceColor','b','HandleVisibility','off');
-plot(r2*cos(2*pi), r2*sin(2*pi), 'ro', 'MarkerSize', 8, 'MarkerFaceColor','r','HandleVisibility','off');
-legend('Initial Orbit', 'Target Orbit',"phasing target","phasing chaser", 'Hohmann Transfer');
-title('Hohmann transfer manoeuvre');
-xlabel('X [km]'); ylabel('Y [km]');
 
 %% Hohmann Transfer - Numerical 
 
@@ -105,91 +72,21 @@ h_start_H = (V1+DeltaV1)*r1;
 [t,r,r_dot,f] = HohmannTransferNumerical(r1,e,i, om, w, f_start, mu_Earth, ToF,h_start_H, DeltaV1);
 
 
-%% Plot of the orbits
 
-figure
-axis equal; hold on; grid on;
-plot(0, 0, 'bo', 'MarkerSize', 20, 'MarkerFaceColor','k','HandleVisibility','off');
 
-% Plot the analitical Hohmann transfer
-plot(Htransfert(1,:), Htransfert(2,:), 'r-', 'LineWidth', 2);
+%% Plot numerical obrit
 
-% Plot the numerical Hohmann transfer
-plot(r(1,:),r(2,:), 'b-', 'LineWidth', 1);
-title('Numerical and analitical Hohmann transfer')
-legend("Numerical transfer ","Analitical transfer");
-xlabel('X [km]'); ylabel('Y [km]');
+plot_numerical(Htransfer,r, a_h,e_h,f)
 
-%% Plot of relative error
+%% Constant of motion
 
-% Compute the relative error between the analitical and numerical orbit
-r_trans_analitic = a_h*(1-e_h^2) ./ (1+e_h*cos(f));
-
-figure; grid on;
-error_rel = (vecnorm(r)-r_trans_analitic)./r_trans_analitic;
-plot(f, error_rel)
-title('Relative error')
-xlabel('True anomaly [rad]'); ylabel('Relative error [%]');
-
-%% Constant of motion :
-
-% 1. Angular momentum h %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-h_vec = cross(r, r_dot);
-h_value = vecnorm(h_vec);
-
-% Max relative error between numerical and analitical solution
-error_h_rel = max(abs(h_value-ones(1,length(t))*h_start_H))/h_start_H*100;
-
-% 2. Eccentricity vector %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-e_vec = cross(r_dot, h_vec)/mu_Earth - r./vecnorm(r);
-e_value = vecnorm(e_vec);
-
-% Max relative error between numerical and analitical solution
-error_e_rel = max(abs(e_value-ones(1,length(t))*e_h))/e_h*100;
-
-% 3. Total energy %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% Total orbital energy of the Hohmann transfer (analytical)
-E_H = 0.5 * (V1 + DeltaV1)^2 - mu_Earth /r1;
-
-% Total orbital energy of the Hohmann transfer (numerical)
-E = 0.5 * vecnorm(r_dot).^2 - mu_Earth ./ vecnorm(r);
-
-% Max relative error between numerical and analitical solution
-error_E_rel = max(abs(E - ones(1,length(t))*E_H))/E_H*100;
-
-%% Plot of the results 
-
-figure;
-subplot(3,1,1);
-plot(t, h_value, 'r', 'LineWidth', 0.5); hold on;
-plot(t,ones(1,length(t))*h_start_H, 'b', 'LineWidth', 0.5); grid on;
-title('Angular momentum'); ylabel('h $ [\mathrm{km^2}/\mathrm{s}]$', 'Interpreter', 'latex');
-lgd_h = legend('Numerical angolar momentum','Analitical angolar momentum');
-lgd_h.Position = [0.7 0.79 0.05 0.05]; 
-xlabel('Time [s]');
-
-subplot(3,1,2);
-plot(t, e_value, 'r', 'LineWidth', 0.5); hold on;
-plot(t,ones(1,length(t))*e_h, 'b', 'LineWidth', 0.5); grid on;
-title('Eccentricity vector'); ylabel('$e [-]$', 'Interpreter', 'latex');
-lgd_e = legend('Numerical eccentricity','Analitical eccentricity');
-lgd_e.Position = [0.725 0.5 0.05 0.05]; 
-xlabel('Time [s]');
-
-subplot(3,1,3);
-plot(t, E, 'r', 'LineWidth', 0.5); hold on;
-plot(t,ones(1,length(t))*E_H, 'b', 'LineWidth', 0.5); grid on;
-title('Total orbital energy'); ylabel('$\epsilon$', 'Interpreter', 'latex');
-lgd_E =legend('Numerical orbital energy','Analitical orbital energy');
-lgd_E.Position = [0.725 0.18 0.05 0.05]; 
-xlabel('Time [s]');
+[error_h_rel,error_e_rel,error_E_rel] = constant_of_motion(r,r_dot, t,r1,h_start_H,mu_Earth, e_h, V1 , DeltaV1);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Hohmann transfer - Numerical v2
 f_start = 0;
-[t,r,r_dot,f_num_sol] = HohmannTransferNumerical_v2(r1,e,i, om, w, f_start, mu_Earth, ToF,h_start_H, DeltaV1,DeltaV2, t_phasing);
+[t,r,r_dot,~] = HohmannTransferNumerical_v2(r1,e,i, om, w, f_start, mu_Earth, ToF,h_start_H, DeltaV1,DeltaV2, t_phasing);
 
 figure
 axis equal; hold on; grid on;

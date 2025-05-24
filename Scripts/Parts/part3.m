@@ -24,7 +24,10 @@ function [] = part3(rho,CD,A,m,ToF_min,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,del
 % Creation date: 13/05/2025
 % Update date:
 
-addpath("Functions\")
+addpath("Functions\General_Functions")
+addpath("Functions\Function_Part2")
+addpath("Functions\Function_Part3")
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -117,6 +120,7 @@ plot(t,vecnorm(r_t-r_c_drag,2,1),"r")
 title("Distance target - chaser with drag")
 xlabel("t [s]")
 ylabel("[km]")
+
 
 fprintf('Final position offset target - chaser without drag: %.4f [m]\n', norm(r_t(:,end)-r_c(:,end),2)*1000);
 fprintf('Final velocity offset target - chaser with drag: %.4f [m]\n', norm(r_t(:,end)-r_c_drag(:,end),2)*1000);
