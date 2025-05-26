@@ -102,8 +102,8 @@ end
 Delta_T=ff(idx); % select Delta T (ToF) for min deltaV
 deltaV1=deltaV1(idx,:)';
 deltaV2=deltaV2(idx,:)';
-fprintf('Minimum total impulse: %.4f [km/s]\n', min_dV*r2);
-fprintf('ToF for minimum DeltaV: %.4f [s] (%.2f minutes)\n', Delta_T/n2, Delta_T/n2/60);
+fprintf('Minimum total impulse: %.4f m/s \n', min_dV*r2*n2*1000);
+fprintf('ToF for minimum DeltaV: %.4f s (%.2f minutes)\n', Delta_T/n2, Delta_T/n2/60);
 
 
 % Plot impulse for different time of flight
@@ -193,5 +193,7 @@ title("HWC solution velocity")
 xlabel("v_{\xi} [-]")
 ylabel("v_{\eta} [-]")
 legend("V after 2° impulse")
+
+fprintf('Final position offset target - chaser without drag, numerical solution HCW: %.4f m \n \n', norm([csi(end);eta(end)],2)*r2*1000);
 
 end
