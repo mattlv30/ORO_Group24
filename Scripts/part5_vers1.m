@@ -89,5 +89,4 @@ deltaVtot=norm(deltaV1,2)+norm(deltaV2,2); % total impulse
 fprintf('Final position offset with drag, relative CCS: %.4f [m]\n', norm([csi(end);eta(end)],2)*r2*1000);
 fprintf('ToF: %.4f [s]\n', Delta_T/n2);
 fprintf('using total impulse: %.4f [m/s]\n', deltaVtot*r2*n2*1000);
-norm(deltaV1,2)
 end

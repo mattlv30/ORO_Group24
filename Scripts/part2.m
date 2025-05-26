@@ -7,12 +7,7 @@ function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 % r = a + (b-a).*rand(n,1)
 rH_err = [500 + (1000-500).*rand(2,1);0]./1000; % errors between 500 and 1000 in the plane [m]-->[km]
 rH_dot_err = [0.1 + (1-0.1).*rand(2,1);0]./1000; % errors between 0.1 and 1in the plane [m/s]-->[km/s]
-rH_err=[0.9786;
-    0.7427;
-         0];
-rH_dot_err=[ 0.8203;
-    0.2277;
-         0]/1000;
+
 % compute for different Delta T time of flight (f_)
 % to adimentionalize it is used L=r2 n=n2 of the target
 % using L=R for normalization distance
