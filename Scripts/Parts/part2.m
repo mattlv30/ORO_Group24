@@ -3,6 +3,7 @@
 
 function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 
+<<<<<<< HEAD:Scripts/Parts/part2.m
 %% Inputs
 % r2 - radius of the target orbit
 % n2 - mean motion of the target object
@@ -29,6 +30,11 @@ addpath("Functions\Function_Part2")
 load Parts\'Random error_part2'\rH_err.mat rH_err
 load Parts\'Random error_part2'\rH_dot_err.mat rH_dot_err
 
+=======
+% r = a + (b-a).*rand(n,1)
+rH_err = [500 + (1000-500).*rand(2,1);0]./1000; % errors between 500 and 1000 in the plane [m]-->[km]
+rH_dot_err = [0.1 + (1-0.1).*rand(2,1);0]./1000; % errors between 0.1 and 1in the plane [m/s]-->[km/s]
+>>>>>>> e0144bbd882c2dfa7c71aff837d0f1ad0eedc280:Scripts/part2.m
 
 % compute for different Delta T time of flight (f_)
 % to adimentionalize it is used L=r2 n=n2 of the target
@@ -102,8 +108,13 @@ end
 Delta_T=ff(idx); % select Delta T (ToF) for min deltaV
 deltaV1=deltaV1(idx,:)';
 deltaV2=deltaV2(idx,:)';
+<<<<<<< HEAD:Scripts/Parts/part2.m
 fprintf('Minimum total impulse: %.4f m/s \n', min_dV*r2*n2*1000);
 fprintf('ToF for minimum DeltaV: %.4f s (%.2f minutes)\n', Delta_T/n2, Delta_T/n2/60);
+=======
+fprintf('minimum total impulse: %.4f [m/s]\n', min_dV*r2*n2*1000);
+fprintf('ToF for min_dV: %.4f [s]\n', Delta_T/n2);
+>>>>>>> e0144bbd882c2dfa7c71aff837d0f1ad0eedc280:Scripts/part2.m
 
 
 % Plot impulse for different time of flight
@@ -183,7 +194,11 @@ title("HWC solution position")
 xlabel("\xi [-]")
 ylabel("\eta [-]")
 
+<<<<<<< HEAD:Scripts/Parts/part2.m
 % Velocity evolution in Hill CCS
+=======
+% velocity evolution in Hill CCS
+>>>>>>> e0144bbd882c2dfa7c71aff837d0f1ad0eedc280:Scripts/part2.m
 figure;
 hold on
 plot(v_csi,v_eta,'HandleVisibility','off')
@@ -194,6 +209,10 @@ xlabel("v_{\xi} [-]")
 ylabel("v_{\eta} [-]")
 legend("V after 2° impulse")
 
+<<<<<<< HEAD:Scripts/Parts/part2.m
 fprintf('Final position offset target - chaser without drag, numerical solution HCW: %.4f m \n \n', norm([csi(end);eta(end)],2)*r2*1000);
 
+=======
+fprintf('Final position offset target - chaser without drag, numerical solution HCW: %.4f [m]\n', norm([csi(end);eta(end)],2)*r2*1000);
+>>>>>>> e0144bbd882c2dfa7c71aff837d0f1ad0eedc280:Scripts/part2.m
 end
