@@ -23,6 +23,7 @@ exit=false;
 Nsteps=11;
 iter=1;
 itermax=100;
+itermax=50;
 err=zeros(itermax,1);
 
 figure;
