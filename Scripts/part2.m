@@ -7,6 +7,12 @@ function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 % r = a + (b-a).*rand(n,1)
 rH_err = [500 + (1000-500).*rand(2,1);0]./1000; % errors between 500 and 1000 in the plane [m]-->[km]
 rH_dot_err = [0.1 + (1-0.1).*rand(2,1);0]./1000; % errors between 0.1 and 1in the plane [m/s]-->[km/s]
+rH_err=[0.9786;
+    0.7427;
+         0];
+rH_dot_err=[ 0.8203;
+    0.2277;
+         0]/1000;
 % compute for different Delta T time of flight (f_)
 % to adimentionalize it is used L=r2 n=n2 of the target
 % using L=R for normalization distance
@@ -73,8 +79,8 @@ end
 Delta_T=ff(idx); % select Delta T (ToF) for min deltaV
 deltaV1=deltaV1(idx,:)';
 deltaV2=deltaV2(idx,:)';
-fprintf('minimum total impulse: %.4f [km/s]\n', min_dV*r2);
-fprintf('ToF for min_dV: %.4f [s]\n', Delta_T*n2);
+fprintf('minimum total impulse: %.4f [m/s]\n', min_dV*r2*n2*1000);
+fprintf('ToF for min_dV: %.4f [s]\n', Delta_T/n2);
 
 figure;
 plot(ff,deltaVtot,Color="b")
@@ -141,8 +147,21 @@ ylabel("[km/s]")
 
 % rendezvous trajectory in Hill CCS
 figure;
-plot(csi,eta)
-title("HWC solution")
-xlabel("csi [-]")
-ylabel("eta [-]")
+plot(csi,eta,"b")
+title("HWC solution position")
+xlabel("\xi [-]")
+ylabel("\eta [-]")
+
+% velocity evolution in Hill CCS
+figure;
+hold on
+plot(v_csi,v_eta,'HandleVisibility','off')
+plot(v_csi(end)+deltaV2(1),v_eta(end)+deltaV2(2),"r*")
+hold off
+title("HWC solution velocity")
+xlabel("v_{\xi} [-]")
+ylabel("v_{\eta} [-]")
+legend("V after 2° impulse")
+
+fprintf('Final position offset target - chaser without drag, numerical solution HCW: %.4f [m]\n', norm([csi(end);eta(end)],2)*r2*1000);
 end
