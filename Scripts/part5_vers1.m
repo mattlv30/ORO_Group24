@@ -11,18 +11,15 @@ function []=part5_vers1(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1)
 % to avoid loosing the solution from the range, it is implemented a control 
 % in order to have a monotonically decreasing error each accepted iteration
 % A better estimate on the solution range would be beneficial, in this case
-% N is set equal to 1
 % N is set equal to 2
 
 coeff_ad=1/2*rho*CD*A/m *r2;
 tspan=[0 Delta_T]; % fixed ToF
-N=1;
 N=2;
 exit=false;
 
 Nsteps=11;
 iter=1;
-itermax=100;
 itermax=50;
 err=zeros(itermax,1);
 
