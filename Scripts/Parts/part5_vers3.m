@@ -3,11 +3,6 @@
 
 function []=part5_vers3(rho,CD,A,m,r2,n2,rH_err,rH_dot_err,deltaV1,deltaVtot_vers2)
 
-%%
-addpath("Functions\General_Functions")
-addpath("Functions\Function_Part2")
-addpath("Functions\Function_Part3")
-addpath("Functions\Function_Part5")
 
 %%
 

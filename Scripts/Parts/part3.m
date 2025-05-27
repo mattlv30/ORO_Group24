@@ -24,10 +24,6 @@ function [] = part3(rho,CD,A,m,ToF_min,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,del
 % Creation date: 13/05/2025
 % Update date:
 
-addpath("Functions\General_Functions")
-addpath("Functions\Function_Part2")
-addpath("Functions\Function_Part3")
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

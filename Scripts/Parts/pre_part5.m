@@ -4,11 +4,6 @@
 
 function [] = pre_part5(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1)
 
-%%
-addpath("Functions\General_Functions")
-addpath("Functions\Function_Part2")
-addpath("Functions\Function_Part3")
-addpath("Functions\Function_Part5")
 
 %%
 

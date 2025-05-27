@@ -21,10 +21,17 @@ function [rH_err,rH_dot_err,Delta_T,deltaV1,deltaV2] = part2(r2,n2)
 % Creation date: 13/05/2025
 % Update date:
 
-addpath("Functions\General_Functions")
-addpath("Functions\Function_Part2")
+%addpath("Functions\General_Functions")
+%addpath("Functions\Function_Part2")
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% folder = fullfile(userpath, "Scripts","Parts",'Random error_part2');
+% file = fullfile(folder, 'rH_err.mat');
+% rH_err=table2array(struct2table(load(file)));
+% 
+% file_dot = fullfile(folder, 'rH_dot_err.mat');
+% rH_dot_err=table2array(struct2table(load(file_dot)));
 
 load Parts\'Random error_part2'\rH_err.mat rH_err
 load Parts\'Random error_part2'\rH_dot_err.mat rH_dot_err

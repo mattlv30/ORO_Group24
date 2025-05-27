@@ -3,7 +3,8 @@
 
 clear; clc; close all; 
 
-addpath("Parts\")
+folder = fullfile(userpath, 'Scripts');
+addpath(genpath(folder))
 
 %% Initial data 
 
