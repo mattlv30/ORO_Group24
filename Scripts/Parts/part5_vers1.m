@@ -1,6 +1,14 @@
 % this function is the first version of a possible solution
 
 function []=part5_vers1(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1)
+%% 
+
+addpath("Functions\General_Functions")
+addpath("Functions\Function_Part2")
+addpath("Functions\Function_Part3")
+addpath("Functions\Function_Part5")
+
+
 %% solution, monotonic decreasing err
 
 % small perturbation-->assuming there is a solution in a certain range of the ideal solution
@@ -86,7 +94,11 @@ end
 deltaV2=-[v_csi(end);v_eta(end);v_zeta(end)]; % second impulse
 deltaVtot=norm(deltaV1,2)+norm(deltaV2,2); % total impulse
 
-fprintf('Final position offset with drag, relative CCS: %.4f [m]\n', norm([csi(end);eta(end)],2)*r2*1000);
-fprintf('ToF: %.4f [s]\n', Delta_T/n2);
-fprintf('using total impulse: %.4f [m/s]\n', deltaVtot*r2*n2*1000);
+disp(" ==================== Part 5 - Optimisation of Delta V and ToF ==================== ")
+disp(" ")
+
+fprintf('Final position offset with drag, relative CCS: %.4f m \n', norm([csi(end);eta(end)],2)*r2*1000);
+fprintf('Time of Flight (ToF): %.4f s \n', Delta_T/n2);
+fprintf('Total impulse: %.4f m/s \n', deltaVtot*r2*n2*1000);
+disp(" ")
 end

@@ -35,11 +35,15 @@ addpath("Functions\Function_Part1")
 % Computing the Hohmann transfer deltaV using the analitical formulation
 [DeltaV1,DeltaV2, DeltaVtot, a_h, e_h, ToF] = HohmannTransferAnalitical(r1,r2, mu_Earth);
 
+disp(" ==================== Part 1 - Hohmann Transfer ==================== ")
+disp(" ")
 
 fprintf('DeltaV1: %.4f km/s\n', DeltaV1);
 fprintf('DeltaV2: %.4f km/s\n', DeltaV2);
 fprintf('Total DeltaV: %.4f km/s\n', DeltaVtot);
 fprintf('Time of Flight: %.1f s (%.2f minutes)\n', ToF, ToF/60);
+
+disp(" ")
 
 %% Phasing
 

@@ -53,4 +53,12 @@ m=325; % sat mass [kg]
  
 part3(rho,CD,A,m,Delta_T,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,deltaV2)
 
+%% Part 5 - Optimisation of Delta V and ToF
 
+pre_part5(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1)
+
+part5_vers1(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1)
+
+%deltaVtot_vers2=part5_vers2(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1);
+
+%part5_vers3(rho,CD,A,m,r2,n2,rH_err,rH_dot_err,deltaV1,deltaVtot_vers2)

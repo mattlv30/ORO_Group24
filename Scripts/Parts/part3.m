@@ -75,6 +75,9 @@ title("Distance target - chaser without drag")
 xlabel("t [s]")
 ylabel("[km]")
 
+disp(" ==================== Part 3 - Perturbations ==================== ")
+disp(" ")
+
 fprintf('Final position offset target - chaser without drag (equatorial CCS): %.4f m \n', norm(r_t(:,end)-r_c(:,end),2)*1000);
 
 %% rendezvous in Equatorial with drag on chaser
@@ -152,7 +155,9 @@ legend("V after 2° impulse")
 hold off
 
 fprintf('Final position offset target - chaser with drag relative CCS: %.4f m\n', norm([csi(end);eta(end)],2)*r2*1000);
-fprintf('Final velocity offset target - chaser with drag relative CCS: %.4f m/s \n \n', norm([v_csi(end)+deltaV2(1);v_eta(end)+deltaV2(2)],2)*r2*1000);
+fprintf('Final velocity offset target - chaser with drag relative CCS: %.4f m/s \n', norm([v_csi(end)+deltaV2(1);v_eta(end)+deltaV2(2)],2)*r2*1000);
+
+disp(" ")
 
 end
 
