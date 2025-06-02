@@ -59,6 +59,8 @@ part3(rho,CD,A,m,Delta_T,r2,mu_Earth,rH_err,rH_dot_err,deltaV1,deltaV2)
 % Contact force on the end effector 
 F = 10; %[N]
 
+w_5 = [0 -F 0];
+
 % Link geometry
 L1 = 0.05; %[m]
 L2 = 0.30; %[m]
@@ -66,9 +68,24 @@ L3 = 0.05; %[m]
 L4 = 0.30; %[m]
 L5 = 0.30; %[m]
 
+L = [L1 L2 L3 L4 L5];
+
 % Joint rotation
-theta1_deg = 45; %[°] 
-theta_1 = deg2rad(theta1_deg); 
+theta1_deg = 0; %[°] 
+theta1 = deg2rad(theta1_deg); %[rad]
+theta2_deg = -45; %[°] 
+theta2 = deg2rad(theta2_deg); %[rad]
+theta3_deg = 0; %[°] 
+theta3 = deg2rad(theta3_deg); %[rad]
+theta4_deg = 45; %[°] 
+theta4 = deg2rad(theta4_deg); %[rad]
+theta5_deg = 0; %[°] 
+theta5 = deg2rad(theta5_deg); %[rad]
+
+theta = [theta1 theta2 theta3 theta4 theta5];
+
+[c_ij, r, Nl,Nd, N] = part4(L,theta);
+
 
 
 %% Part 5 - Optimisation of Delta V and ToF

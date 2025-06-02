@@ -82,7 +82,7 @@ theta5 = deg2rad(theta5_deg); %[rad]
 
 theta = [theta1 theta2 theta3 theta4 theta5];
 
-[c_ij, r, Nl,Nd, N] = part4(L,theta);
+[tau] = part4(L,theta, F);
 
 
 

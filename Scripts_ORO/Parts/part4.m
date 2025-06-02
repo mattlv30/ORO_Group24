@@ -1,16 +1,21 @@
 %% Part 4
 % This function solves all the request of the fourth part of the project
 
-function [c_ij, r, Nl,Nd, N] = part4(L,theta)
+function [tau] = part4(L,theta, F)
 %% Inputs
 % L - link length (vector)
 % theta - joints displacement (vector)
+% F - contact force on the end effector 
 
 %% Output
 
 %%
 
+% Number od joints
 n = length(theta);
+
+% Wrench on the fifth link
+w_5 = [0 -F 0 0 0 0]';
 
 % Distance from the centre of the CCS to the base of the fist joint
 L0 = 1; %[m]
@@ -53,6 +58,9 @@ e = [e1 e2 e3 e4 e5];
 figure
 axis equal; hold on; grid on;
 plot(r(1,:), r(2,:), 'bo')
+title('Centre of Mass of each link')
+xlabel('x [m]'); ylabel('x [m]');
+
 
 %% System Jacobian Matrix
 
@@ -90,5 +98,10 @@ end
 
 N = Nl*Nd;
 
+% Wrench of the manipulator 
+w = zeros(6*(n+1),1);
+w (end-5:end,:) = w_5;
+
+tau = N'*w;
 
 end
