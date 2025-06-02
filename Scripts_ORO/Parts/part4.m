@@ -1,7 +1,7 @@
 %% Part 4
 % This function solves all the request of the fourth part of the project
 
-function [tau] = part4(L,theta, F)
+function [tau] = part4(L,theta, w_5)
 %% Inputs
 % L - link length (vector)
 % theta - joints displacement (vector)
@@ -9,57 +9,28 @@ function [tau] = part4(L,theta, F)
 
 %% Output
 
-%%
+% tau - generalised force matrix representing the combined base and
+% manipulator generalised forces (first 6 components are the resultant
+% moment and forces on the base in inertial coordinates, while the other
+% are the actuating force or torques on the i-th joint of the manipulator)
+
+%% Info 
+
+% Authors: Cristian Iacovella, Mattia Li Vigni, Sara Moreira 
+% Creation date: 30/05/2025
+% Update date: 02/06/2025
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Definition of geometrical parameters
 
 % Number od joints
 n = length(theta);
 
-% Wrench on the fifth link
-w_5 = [0 -F 0 0 0 0]';
-
 % Distance from the centre of the CCS to the base of the fist joint
 L0 = 1; %[m]
 
-% Definition fo the vectors connecting each joint to the Centre of mass
-% (CoM) of the successive link
-
-g1 = [0 L(1)/2]';
-g2 = L(2)/2*[sin(theta(2)) cos(theta(2))]';
-g3 = L(3)/2*[sin(theta(2)) cos(theta(2))]';
-g4 = L(4)/2*[sin(theta(2)+theta(4)) cos(theta(2)+theta(4))]';
-g5 = L(5)/2*[0 1]';
-
-g = [g1 g2 g3 g4 g5];
-
-% Definition of the position of the CoMs of each link in the intertial
-% reference frame 
-
-r0 = [0 0]';
-r1 = r0 + [0 L0/2]' + g1;
-r2 = r1 + L(1)/2*[0 1]' + g2;
-r3 = r2 + L(2)/2*[sin(theta(2)) cos(theta(2))]' + g3;
-r4 = r3 + L(3)/2*[sin(theta(2)) cos(theta(2))]' + g4;
-r5 = r4 + +L(4)/2*[sin(theta(2)+theta(4)) cos(theta(2)+theta(4))]' + g5;
-
-r = [r0 r1 r2 r3 r4 r5];
-
-% Definition of the versors of each revolute joint (note that the versor
-% of the joints alligned with the z axis are always constant since we
-% assume to be in a 2D space)
-
-e1 = [0 1 0]';
-e2 = [0 0 1]';
-e3 = [sin(theta(2)) cos(theta(2)) 0]';
-e4 = [0 0 1]';
-e5 = [sin(theta(2)+theta(4)) cos(theta(2)+theta(4)) 0]';
-
-e = [e1 e2 e3 e4 e5];
-
-figure
-axis equal; hold on; grid on;
-plot(r(1,:), r(2,:), 'bo')
-title('Centre of Mass of each link')
-xlabel('x [m]'); ylabel('x [m]');
+[r,g,e,j_pos, links] = geom_parameters(L,theta, L0);
 
 
 %% System Jacobian Matrix
@@ -81,7 +52,7 @@ for i = 1:n+1
     end
 end
 
-% Rectangualr block daigonal matrix Nd, size 6(n+1)x(6+n)
+% Rectangualr block diagonal matrix Nd, size 6(n+1)x(6+n)
 
 Nd = zeros(6*(n+1),(6+n));
 P0 = eye(6);
@@ -102,6 +73,35 @@ N = Nl*Nd;
 w = zeros(6*(n+1),1);
 w (end-5:end,:) = w_5;
 
+%% Computation of the generalised force matrix
+
 tau = N'*w;
+
+%% Plot and display 
+
+figure
+hold on; grid on; %axis equal;
+plot(links(1,:), links(2,:), 'k', 'LineWidth', 2)
+plot(r(1,2:end), r(2,2:end), 'bo', 'LineWidth', 1.5)
+plot(j_pos(1,:), j_pos(2,:), 'r*', 'LineWidth', 1.5)
+plot([-L0/2 -L0/2 L0/2 L0/2], [0 L0/2 L0/2 0], 'Color', [0.5 0.5 0.5], 'LineWidth', 1)
+plot(links(1,end), links(2,end), 'go', 'MarkerSize', 10, 'MarkerFaceColor','b','HandleVisibility','off');
+legend('Links', 'CoM of Links', 'Joints', 'Base')
+
+title('Robotic manipulator configuration')
+xlabel('x [m]'); ylabel('y [m]');
+xlim([-1 1]); ylim([0 1.6]);
+
+disp(" ==================== Part 4 - Robotic Manipulator ==================== ")
+disp(" ")
+
+fprintf('Torque on the base (along z axis): %.4f Nm \n', tau(3));
+fprintf('Force on the base (along x axes): %.4f N \n', tau(4));
+fprintf('Force on the base (along x axes): %.4f N \n', tau(5));
+disp(" ")
+fprintf('Torque on the 2nd joints: %.4f Nm \n',  tau(8));
+fprintf('Torque on the 4th joints: %.4f Nm \n',  tau(10));
+disp(" ")
+
 
 end

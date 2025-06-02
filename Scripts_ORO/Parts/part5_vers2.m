@@ -23,12 +23,12 @@ deltaV1=res; % to try the calculated first impulse
 deltaV2=-[v_csi(end);v_eta(end);0]; % second impulse
 deltaVtot=norm(deltaV1,2)+norm(deltaV2,2); % total impulse
 
-% disp(" ==================== Part 5 - Optimisation of Delta V and ToF ==================== ")
-% disp(" ")
-% 
-% fprintf('Final position offset target - chaser with drag relative CCS: %.4f [m]\n', norm([csi(end);eta(end)],2)*r2*1000);
-% fprintf('ToF: %.4f [s]\n', Delta_T/n2);
-% fprintf('using total impulse: %.4f [m/s]\n', deltaVtot*r2*n2*1000);
-% 
-% disp(" ")
+disp(" ==================== Part 5 - Optimisation of Delta V and ToF ==================== ")
+disp(" ")
+
+fprintf('Final position offset target - chaser with drag relative CCS: %.4f m\n', norm([csi(end);eta(end)],2)*r2*1000);
+fprintf('ToF: %.4f s\n', Delta_T/n2);
+fprintf('Using total impulse: %.4f m/s\n', deltaVtot*r2*n2*1000);
+
+disp(" ")
 end

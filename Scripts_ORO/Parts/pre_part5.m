@@ -22,7 +22,7 @@ for i=1:length(steps1)
     for j=1:length(steps2)
         deltaV1_opt=[steps1(i);steps2(j);0];
         [~,csi,eta,~,~,~,~] = solveHCW_drag(coeff_ad,[rH_err/r2;rH_dot_err/r2/n2+deltaV1_opt],tspan);
-        plot(deltaV1_opt(2)*r2*n2,sqrt(csi(end)^2+eta(end)^2)*r2*1000,c(i))
+        plot(deltaV1_opt(2)*r2*n2*1000,sqrt(csi(end)^2+eta(end)^2)*r2*1000,c(i))
         temporary_mem(j)=sqrt(csi(end)^2+eta(end)^2);
         A(i,j)=sqrt(csi(end)^2+eta(end)^2); %
     end
