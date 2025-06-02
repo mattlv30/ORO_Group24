@@ -1,4 +1,5 @@
 % this function is the first version of a possible solution
+% ToF is fixed (using the one calculated from the unperturbated rendezvous)
 
 function []=part5_vers1(rho,CD,A,m,Delta_T,r2,n2,rH_err,rH_dot_err,deltaV1)
 
@@ -77,6 +78,11 @@ while exit==false & iter<itermax
     
     %iter=iter+1;
 end
+
+xlabel("iter [-]")
+ylabel("err [m]")
+title("Final position offset at each iteration")
+legend("Accepted iteration","Refused iteration")
 hold off
 
 if iter==itermax

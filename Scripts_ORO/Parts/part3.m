@@ -155,21 +155,33 @@ fprintf('Final velocity offset target - chaser with drag relative CCS: %.4f m/s 
 
 disp(" ")
 
+%% PLOT IDEAL AND DRAG RENDEZVOUS TOGETHER
+[~,csi_id,v_csi_id,eta_id,v_eta_id,~,~] = solveHCW([rH_err(1)/r2;rH_dot_err(1)/r2/n2+deltaV1(1);rH_err(2)/r2;rH_dot_err(2)/r2/n2+deltaV1(2);rH_err(3)/r2;rH_dot_err(3)/r2/n2+deltaV1(3)],tspan);
+figure;
+hold on
+plot(csi_id,eta_id,"b")
+plot(csi_id(end),eta_id(end),"b*",'HandleVisibility','off')
+plot(csi,eta,"r")
+plot(csi(end),eta(end),"r*",'HandleVisibility','off')
+title("Relative position chaser")
+legend("Unperturbated", "Perturbated")
+xlabel("\xi [-]")
+ylabel("\eta [-]")
+hold off
+
+figure;
+hold on
+plot(v_csi_id,v_eta_id,"b")
+plot(v_csi_id(end)+deltaV2(1),v_eta_id(end)+deltaV2(2),"b*",'HandleVisibility','off')
+plot(v_csi,v_eta,"r")
+plot(v_csi(end)+deltaV2(1),v_eta(end)+deltaV2(2),"r*",'HandleVisibility','off')
+title("Relative velocity chaser")
+legend("Unperturbated", "Perturbated")
+xlabel("v_{\xi} [-]")
+ylabel("v_{\eta} [-]")
+hold off
+
+
+
 end
-
-% fprintf('Final velocity offset target - chaser with drag relative CCS: %.4f [m/s]\n', ([v_csi(end);v_eta(end)]+deltaV2([1 2]))*r2*1000);
-
-% %% PLOT IDEAL AND DRAG TRAJECTORY TOGETHER
-% [~,csi_id,~,eta_id,~,~,~] = solveHCW([rH_err(1)/r2;rH_dot_err(1)/r2/n2+deltaV1(1);rH_err(2)/r2;rH_dot_err(2)/r2/n2+deltaV1(2);rH_err(3)/r2;rH_dot_err(3)/r2/n2+deltaV1(3)],tspan);
-% figure;
-% hold on
-% axis equal
-% plot(csi_id,eta_id,"b")
-% plot(csi_id(end),eta_id(end),"b*")
-% plot(csi,eta,"r")
-% plot(csi(end),eta(end),"r*")
-% title("Relative position chaser")
-% xlabel("\xi [-]")
-% ylabel("\eta [-]")
-% hold off
 

@@ -53,8 +53,8 @@ coeff_ad=1/2*rho*CD*A/m *r2;
 
     percentage=impulse_min/deltaVtot_vers2*100;
 
-fprintf('Rendezvous in ToF: %.4f [s]\n', T_min/n2); 
-fprintf('using total impulse: %.4f [m/s]\n', impulse_min*r2*n2*1000);   
-fprintf('This impulse is %4f%% of the one calculated in the previous function.\n', percentage);
+fprintf('Rendezvous in ToF: %.4f s\n', T_min/n2); 
+fprintf('using total impulse: %.4f m/s\n', impulse_min*r2*n2*1000);   
+fprintf('This impulse is %4f%% of the one calculated with fixed ToF. \n', percentage);
 
 end

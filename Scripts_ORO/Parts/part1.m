@@ -130,12 +130,12 @@ xlabel('Time [s]');
 
 subplot(3,1,2);
 plot(t, e_value, 'g', 'LineWidth', 0.5); hold on; grid on;
-title('Eccentricity vector'); ylabel('$e [-]$', 'Interpreter', 'latex');
+title('Eccentricity'); ylabel('$e \ [-]$', 'Interpreter', 'latex');
 xlabel('Time [s]');
 
 subplot(3,1,3);
 plot(t, E, 'b', 'LineWidth', 0.5); hold on; grid on;
-title('Total orbital energy'); ylabel('$\epsilon$', 'Interpreter', 'latex');
+title('Spcecific total mechanical energy'); ylabel('$\epsilon \ [J/kg]$' , 'Interpreter', 'latex');
 xlabel('Time [s]');
 
 
