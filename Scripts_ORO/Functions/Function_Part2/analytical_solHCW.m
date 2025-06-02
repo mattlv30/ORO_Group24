@@ -1,10 +1,17 @@
-% Description
-% input
-% output Matrixes
-% informations 
-% author CI
-% creation date 23/03/2025
-% update date
+%% Analytical computation of the Hill_Chloessy-Whiltshire equations
+
+%% Input
+% f0 - Initial epoch
+
+%% Output 
+% Matrixes for analytical solution of the HCW
+
+
+%% Info 
+
+% Authors: Cristian Iacovella, Mattia Li Vigni, Sara Moreira 
+% Creation date: 09/05/2025
+% Update date:
 
 function [phi_p, phi_c] = analytical_solHCW(f0)
 % z = phi * z0

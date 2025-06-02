@@ -1,10 +1,16 @@
-% Description 
-% input mu, h =sqrt(mu*a*(1-e^2), intial condition r0 r_dot0
-% output time, r, r_dot
+%% Solve KR2BP (specific for part 3)
+
+%% Input 
+% mu, h =sqrt(mu*a*(1-e^2), intial condition r0 r_dot0
+
+%% Output time, r, r_dot
 % informations KR2BP [r_dot_dot]= -mu*[r]/r^3 , [] a vector , r norm
-% author CI
-% creation date 18/03/2025
-% update date
+
+%% Info 
+
+% Authors: Cristian Iacovella, Mattia Li Vigni, Sara Moreira 
+% Creation date: 30/05/2025
+% Update date:
 
 function [t,r,r_dot] = solve2bodyK_part3(mu,cond_i,tspan)
 % z=[x y z vx vy vz f]

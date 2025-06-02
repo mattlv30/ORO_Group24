@@ -1,11 +1,13 @@
-% Description integrates the normalized Hill-Clohessy-Wiltshire equations
-% input tspan, intial condition [cis0,v_csi0,eta0,v_eta0,zeta0,v_zeta0]
-% output 
-% informations 
-% author CI
-% creation date 23/03/2025
-% update date
+%% Numerical integration the normalized Hill-Clohessy-Wiltshire equations
+%% Input 
+% tspan, intial condition [cis0,v_csi0,eta0,v_eta0,zeta0,v_zeta0]
+%% Output 
+% time, position components and velocity components
+%% Info 
 
+% Authors: Cristian Iacovella, Mattia Li Vigni, Sara Moreira 
+% Creation date: 09/05/2025
+% Update date:
 function [t,csi,v_csi,eta,v_eta,zeta,v_zeta] = solveHCW(cond_i,tspan)
 % standard substitution
 % z=[csi,csi',eta,eta',zeta,zeta']

@@ -1,11 +1,14 @@
+%% Perfiocal to equatorial 
 % Description from state vector in perifocal frame to equatorial frame
 % input rP rP_dot perifocal, om right ascension of the ascending node OMEGA
 %       w argument of periapsis omega, i inclination i
 % output rE rP_dot equatorial frame state vector
 % informations elementary rotation angle f about angular momentum direction
-% author CI
-% creation date 18/03/2025
-% update date
+%% Info 
+
+% Authors: Cristian Iacovella, Mattia Li Vigni, Sara Moreira 
+% Creation date: 09/05/2025
+% Update date:
 
 function [rE,rE_dot] = get_perifocal2equatorial(rP,rP_dot,om,i,w)
 

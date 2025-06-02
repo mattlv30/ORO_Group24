@@ -1,4 +1,4 @@
-%% HohmannTransferNumerical
+%% Kepler Restricted 2 Body Problem
 % This function numerically solves the Kepler restricted 2 body problem. It
 % also computes the numerical evolution of the true anomaly of the
 % satellite
