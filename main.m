@@ -83,9 +83,9 @@ theta5_deg = 0; %[°]
 theta5 = deg2rad(theta5_deg); %[rad]
 
 % 2 and 4 can vary to consider different configurations
-theta2_deg = 60; %[°] 
+theta2_deg = -45; %[°] 
 theta2 = deg2rad(theta2_deg); %[rad]
-theta4_deg = 60; %[°] 
+theta4_deg = 45; %[°] 
 theta4 = deg2rad(theta4_deg); %[rad]
 
 theta = [theta1 theta2 theta3 theta4 theta5];
