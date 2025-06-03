@@ -101,7 +101,7 @@ tc_drag=tc_drag/n2; % dimensional time = tt from target numerical integration
 
 figure;
 plot(tc_drag,vecnorm(r_c_drag-r_c,2,1),"b") % position difference chaser perturbated/non
-title("Distance chaser with drag from its unperturbated orbit")
+title("Distance chaser with drag from its unperturbed orbit")
 xlabel("t [s]")
 ylabel("[km]")
 
@@ -164,7 +164,7 @@ plot(csi_id(end),eta_id(end),"b*",'HandleVisibility','off')
 plot(csi,eta,"r")
 plot(csi(end),eta(end),"r*",'HandleVisibility','off')
 title("Relative position chaser")
-legend("Unperturbated", "Perturbated")
+legend("Unperturbed", "Perturbed")
 xlabel("\xi [-]")
 ylabel("\eta [-]")
 hold off
@@ -176,7 +176,7 @@ plot(v_csi_id(end)+deltaV2(1),v_eta_id(end)+deltaV2(2),"b*",'HandleVisibility','
 plot(v_csi,v_eta,"r")
 plot(v_csi(end)+deltaV2(1),v_eta(end)+deltaV2(2),"r*",'HandleVisibility','off')
 title("Relative velocity chaser")
-legend("Unperturbated", "Perturbated")
+legend("Unperturbed", "Perturbed")
 xlabel("v_{\xi} [-]")
 ylabel("v_{\eta} [-]")
 hold off
