@@ -1,0 +1,62 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Orbital Robotics & Distributed Space Systems Final Project
+ - Dynamics Modeling of a Space Debris Removal Mission -
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+Author: Iacovella Cristian, Li Vigni Mattia, Moreira Sara
+Contact: cristian.iacovella@studenti.polito.it, mattia.livigini@studenti.polito.it, sara.moreira@studenti.polito.it 
+Creation date: 31/05/2025
+Update date: 03/06/2025
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Description
+
+This README file provides instructions for using the MATLAB script "main.m" and associated scripts/functions.
+Please follow the guidelines below to ensure a smooth execution of the program.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Installation / Requirements
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The code was developed using MATLAB 2024b, some of the functions used may not be present in previous versions.
+Please note that the Optimisation Toolbox is used in some parts of the program (specifically in function part5_vers2 and part5_vers3). To ensure the proper execution of this part of the programme, it’s necessary to install this toolbox. 
+If you don’t have the Optimisation Toolbox, you can install it by following the steps:
+1.             Open MATLAB
+2.             Go to the “Home” tab
+3.             In the “Environment” section, click on the “Add-Ons” tab
+4.             Once the “Add-Ons, you can see all the available add-ons
+5.             Search “Optimisation Toolbox” in the research tab
+6.             Ensure this toolbox is provided by your MATLAB license 
+7.             Follow the instructions to install the toolbox (internet connection is required)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Getting Started / Usage
+
+1. Open this folder as the current folder in MATLAB
+2. Open the main script
+3. Run main
+Please note that to ensure the proper execution of all the parts of the program, the current folder must be the one in which the main is located.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Program Structure
+
+The program is structured as follows: in the current folder, you can find one README file, one MATLAB script and four sub-folders:
+
+README.txt - Project documentation
+main.m - Main script to run the program
+Parts – A folder containing the parts of the project
+Functions – A folder containing the functions necessary to run the program
+Photos - A folder containing the output plot of the program
+Report and assignment – A folder containing the report of the project, in which further details are given regarding each part, and the project assignment, to understand the structure of the program better, considering the objectives given. 
+ 
+The main file is organised into different sections according to the part of the project assignment they solve. At the beginning of each section, the required data are defined according to the assumption of the project. Please note that to ensure a smooth execution of the programme, all the sections should be run in the right order since the output of some functions is the input of others. Each folder contains a dedicated readme. Moreover, the code is further divided and commented to ensure its comprehension. 
+
+Please note that the general program gives as outputs both plots and text messages in the command window. 
+For further details, please find in the Report and assignment folder a detailed explanation of all the mathematical models used in the programme. If more clarifications are needed, feel free to reach us using the contacts above.  
